@@ -27,7 +27,7 @@ import org.springframework.core.env.PropertySource;
 
 import com.hpe.caf.secret.SecretUtil;
 
-class SecretPropertyResolver implements EnvironmentPostProcessor
+final class SecretPropertyResolver implements EnvironmentPostProcessor
 {
     private static final String SECRET_PROPERTY_PREFIX = "secret:";
     private static final Pattern SECRET_PROPERTY_PATTERN = Pattern.compile(SECRET_PROPERTY_PREFIX + "([^:]+)(?::(.+))?");
