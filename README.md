@@ -36,8 +36,8 @@ public class MyApplication {
 3. In your `application.properties` or `application.yaml`, you can now use the `secret:` prefix to reference secrets:
 
 ```yaml
-my.secret.property: secret:MY_SECRET_KEY
-my.secret.with.default: secret:ANOTHER_SECRET:defaultValue
+my.secret.property: ${secret:MY_SECRET_KEY}
+my.secret.with.default: ${secret:ANOTHER_SECRET_KEY:defaultValue}
 ```
 
 The secrets will be automatically resolved during application startup.
