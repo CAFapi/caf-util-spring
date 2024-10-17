@@ -2,25 +2,42 @@
 
 This project provides Spring utility code.
 
-## caf-propertyresolver-spring
+## caf-propertysource-spring
 
-This module provides Spring applications with the ability to resolve secret properties in Spring configuration files.
+This module provides a custom Spring Boot property source that allows for integration of secrets into your application's configuration.
 
-Assuming you have a secret key named `MY_PASSWORD`, you can reference it in a Spring configuration file like this:
+### Usage
 
-```yaml
-password: ${secret:MY_PASSWORD:password}
+1. Add the `caf-propertysource-spring` dependency to your project:
+```xml
+<dependency>
+    <groupId>com.github.cafapi.util.spring</groupId>
+    <artifactId>caf-propertysource-spring</artifactId>
+    <version>VERSION</version>
+</dependency>
 ```
 
-The `SecretPropertyEnvironmentListener` class will resolve the secret key and replace it with the actual value, or use a default value 
-if the secret key is not found. In the example above, the default value is `password`.
-
-The `SecretPropertyEnvironmentListener` class can be added to a Spring application like this:
-
+2. Register the `CafConfigEnvironmentListener`:
 ```java
-public static void main(String[] args) {
-    final SpringApplication application = new SpringApplication(MyService.class);
-    application.addListeners(new SecretPropertyEnvironmentListener());
-    application.run(args);
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MyApplication {
+
+    public static void main(String[] args) {
+        SpringApplication app = new SpringApplication(MyApplication.class);
+        app.addListeners(new CafConfigEnvironmentListener()); // Register the listener
+        app.run(args);
+    }
 }
 ```
+
+3. In your `application.properties` or `application.yaml`, you can now use the `secret:` prefix to reference secrets:
+
+```yaml
+my.secret.property: secret:MY_SECRET_KEY
+my.secret.with.default: secret:ANOTHER_SECRET:defaultValue
+```
+
+The secrets will be automatically resolved during application startup.

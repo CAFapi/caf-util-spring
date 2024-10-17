@@ -65,7 +65,7 @@
     </scm>
 
     <modules>
-        <module>caf-propertyresolver-spring</module>
+        <module>caf-propertysource-spring</module>
     </modules>
 
     <properties>
@@ -78,7 +78,7 @@
             <dependency>
                 <groupId>com.github.cafapi.util</groupId>
                 <artifactId>util-secret</artifactId>
-                <version>3.2.0-US969005-allow-null-default-SNAPSHOT</version>
+                <version>3.2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>

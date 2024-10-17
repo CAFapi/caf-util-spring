@@ -15,17 +15,15 @@
  */
 package com.github.cafapi.util.spring;
 
-import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
-import org.springframework.context.ApplicationListener;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.env.EnvironmentPostProcessor;
 import org.springframework.core.env.ConfigurableEnvironment;
 
-public final class SecretPropertyEnvironmentListener implements ApplicationListener<ApplicationEnvironmentPreparedEvent>
+final class CafConfigEnvironmentPostProcessor implements EnvironmentPostProcessor
 {
     @Override
-    public void onApplicationEvent(final ApplicationEnvironmentPreparedEvent event)
+    public void postProcessEnvironment(final ConfigurableEnvironment environment, final SpringApplication application)
     {
-        final ConfigurableEnvironment environment = event.getEnvironment();
-        final SecretPropertyResolver secretPropertyResolver = new SecretPropertyResolver();
-        secretPropertyResolver.postProcessEnvironment(environment, null);
+        environment.getPropertySources().addFirst(new CafConfigPropertySource());
     }
 }
