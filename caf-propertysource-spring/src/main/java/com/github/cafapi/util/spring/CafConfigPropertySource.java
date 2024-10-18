@@ -49,8 +49,8 @@ final class CafConfigPropertySource extends PropertySource<Object>
                     throw new UncheckedIOException(String.format("Unable to read secret '%s'", key), e);
                 }
             } else {
-                throw new RuntimeException(String.format("Secret specified in configuration has unexpected format. " +
-                        "Expected 'secret:KEY' or 'secret:KEY:DEFAULT_VALUE' but was '%s'", name));
+                throw new RuntimeException(String.format("Secret specified in configuration has unexpected format. "
+                    + "Expected 'secret:KEY' or 'secret:KEY:DEFAULT_VALUE' but was '%s'", name));
             }
         }
 
