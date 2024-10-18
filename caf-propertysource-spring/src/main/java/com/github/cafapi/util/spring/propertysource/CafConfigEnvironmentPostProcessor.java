@@ -13,19 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.cafapi.util.spring;
+package com.github.cafapi.util.spring.propertysource;
 
-import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
-import org.springframework.context.ApplicationListener;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.env.EnvironmentPostProcessor;
 import org.springframework.core.env.ConfigurableEnvironment;
 
-public final class CafConfigEnvironmentListener implements ApplicationListener<ApplicationEnvironmentPreparedEvent>
+final class CafConfigEnvironmentPostProcessor implements EnvironmentPostProcessor
 {
     @Override
-    public void onApplicationEvent(final ApplicationEnvironmentPreparedEvent event)
+    public void postProcessEnvironment(final ConfigurableEnvironment environment, final SpringApplication application)
     {
-        final ConfigurableEnvironment environment = event.getEnvironment();
-        final CafConfigEnvironmentPostProcessor cafConfigEnvironmentPostProcessor = new CafConfigEnvironmentPostProcessor();
-        cafConfigEnvironmentPostProcessor.postProcessEnvironment(environment, null);
+        environment.getPropertySources().addFirst(new CafConfigPropertySource());
     }
 }
