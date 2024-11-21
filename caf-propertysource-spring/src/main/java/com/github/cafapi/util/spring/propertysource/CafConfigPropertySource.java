@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 
 import org.springframework.core.env.PropertySource;
 
-import com.hpe.caf.secret.SecretUtil;
+import com.github.cafapi.common.util.secret.SecretUtil;
 
 final class CafConfigPropertySource extends PropertySource<Object>
 {
