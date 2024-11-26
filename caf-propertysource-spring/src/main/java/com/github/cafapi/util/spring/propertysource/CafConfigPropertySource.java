@@ -26,8 +26,8 @@ import com.github.cafapi.common.util.secret.SecretUtil;
 
 final class CafConfigPropertySource extends PropertySource<Object>
 {
-    private static final String SECRET_PROPERTY_PREFIX = "secret:";
-    private static final Pattern SECRET_PROPERTY_PATTERN = Pattern.compile(SECRET_PROPERTY_PREFIX + "([^:]+)(?::(.+))?");
+    private static final String SECRET_PROPERTY_PREFIX = "secret.";
+    private static final Pattern SECRET_PROPERTY_PATTERN = Pattern.compile("secret\\.(.+)");
 
     public CafConfigPropertySource()
     {
@@ -42,15 +42,14 @@ final class CafConfigPropertySource extends PropertySource<Object>
 
             if (matcher.find()) {
                 final String key = matcher.group(1);
-                final String defaultValue = matcher.group(2);
                 try {
-                    return SecretUtil.getSecret(key, defaultValue);
+                    return SecretUtil.getSecret(key);
                 } catch (final IOException e) {
                     throw new UncheckedIOException(String.format("Unable to read secret '%s'", key), e);
                 }
             } else {
                 throw new RuntimeException(String.format("Secret specified in configuration has unexpected format. "
-                    + "Expected 'secret:KEY' or 'secret:KEY:DEFAULT_VALUE' but was '%s'", name));
+                        + "Expected 'secret.KEY' but was '%s'", name));
             }
         }
 
