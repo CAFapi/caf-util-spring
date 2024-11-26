@@ -49,7 +49,7 @@ final class CafConfigPropertySource extends PropertySource<Object>
                 }
             } else {
                 throw new RuntimeException(String.format("Secret specified in configuration has unexpected format. "
-                        + "Expected 'secret.KEY' but was '%s'", name));
+                    + "Expected 'secret.KEY' but was '%s'", name));
             }
         }
 
