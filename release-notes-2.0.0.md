@@ -1,5 +1,3 @@
-!not-ready-for-release!
-
 #### Version Number
 ${version-number}
 
@@ -10,5 +8,7 @@ ${version-number}
   - Spring Boot version updated from `3.3.3` to `3.4.0`
 
 #### New Features
+- None
 
 #### Known Issues
+- None
