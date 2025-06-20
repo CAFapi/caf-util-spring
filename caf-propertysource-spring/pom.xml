@@ -28,6 +28,7 @@
     </parent>
 
     <artifactId>caf-propertysource-spring</artifactId>
+    <name>caf-propertysource-spring</name>
 
     <dependencies>
         <dependency>
